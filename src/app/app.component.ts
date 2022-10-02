@@ -45,6 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
   color: string = 'blue';
   imageUrl: string = `https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-doi-inthanon-national-park-thailand-36703721.jpg`;
   imageUrl2: string = `https://images.freeimages.com/variants/wJdG4pYDgnLaJo9m7wy61VPt/b6679d1569eb20491ea73c07cf4bfc2406d426757005363d05f4184a67cad3c1`;
+  productsurl: string = '/products';
   Hide() {
     this.hide = !this.hide;
     return this.hide;

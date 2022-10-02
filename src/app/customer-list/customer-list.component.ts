@@ -1,25 +1,44 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { debounceTime, Subject } from 'rxjs';
 import { ICustomer } from '../customer';
+import { CustomerService } from '../customer.service';
 
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.scss'],
 })
-export class CustomerListComponent implements OnInit {
+export class CustomerListComponent implements OnInit, OnChanges {
   @Input() customerlist: ICustomer[] = [];
   coll: ICustomer[];
-  constructor() {}
+  private subject: Subject<string> = new Subject();
+  searchText: string;
+  constructor(customerService: CustomerService) {}
 
   ngOnInit(): void {
     this.coll = this.customerlist;
+    this.subject.pipe(debounceTime(500)).subscribe((searchText) => {
+      this.searchText = searchText;
+      this.handlefilter(searchText);
+    });
   }
 
-  onChanged($event) {
-    let filterBy = $event.target.value.toLowerCase();
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+  handlefilter(filterBy) {
     this.coll = this.customerlist.filter(
       (customer) => customer.CustomerName.toLowerCase().indexOf(filterBy) != -1
     );
-    console.log('text changed');
+  }
+
+  onChanged($event) {
+    this.subject.next($event.target.value);
   }
 }
