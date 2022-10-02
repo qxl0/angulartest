@@ -1,0 +1,7 @@
+<div>Current time is {{ today | date: "hh:mm:ss" }}</div>
+<input type="text" [(ngModel)]="myvalue" #ctrl="ngModel" required />
+<p>Value: {{ myvalue | lowercase }}</p>
+<p>Sales: {{ sales | number: "1.2-2" }}</p>
+<p>Valid: {{ ctrl.valid }}</p>
+
+<button (click)="setValue()">Set Value</button>

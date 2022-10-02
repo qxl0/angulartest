@@ -1,0 +1,9 @@
+<input
+  type="text"
+  name="filterbyname"
+  id="filterbyname"
+  (keyup)="onChanged($event)"
+/>
+<div *ngFor="let temp of coll">
+  <app-customer [customer]="temp"></app-customer>
+</div>

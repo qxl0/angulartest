@@ -1,0 +1,21 @@
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+.customer {
+  display: flex;
+}
+.imagegrp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  row-gap: 10px;
+}
+.image {
+  width: 200px;
+  height: 200px;
+}
