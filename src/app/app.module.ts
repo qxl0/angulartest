@@ -9,6 +9,9 @@ import { ChildComponent } from './child/child.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { ProductsComponent } from './products/products.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { BlogComponent } from './blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { ProductsComponent } from './products/products.component';
     CustomerComponent,
     CustomerListComponent,
     ProductsComponent,
+    HomeComponent,
+    AboutComponent,
+    BlogComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
