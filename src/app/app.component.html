@@ -8,25 +8,7 @@
   </head>
   <body>
     <div>
-      <app-customer-list [customerlist]="coll"></app-customer-list>
-    </div>
-    <div>
-      <button (click)="Hide()">Hide</button>
-    </div>
-    <div>
-      <button style="width: 200px" (click)="ChangeColor()">Change Color</button>
-    </div>
-    <div [ngClass]="color">Some Text to be Hidden</div>
-    <div class="imagegrp">
-      <button style="width: 200px" (click)="toggleImage()">toggle</button>
-      <img *ngIf="showImage" class="image" [src]="imageUrl" alt="" srcset="" />
-      <img class="image" src="{{ imageUrl2 }}" alt="" srcset="" />
-    </div>
-
-    <div>child component:</div>
-    <app-child myvalue="Qiang"></app-child>
-    <div>
-      <div>List of links:</div>
+      <div class="nav">NavBar</div>
       <ul>
         <li class="nav-item">
           <a routerLink="products">Products</a>

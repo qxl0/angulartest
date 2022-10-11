@@ -1,3 +1,23 @@
+<ng-container *ngTemplateOutlet="loadingTemplate"></ng-container>
+<ng-template #loadingTemplate>
+  <div>Loading...</div>
+</ng-template>
 <div>
   <button (click)="resolve()">Resolve</button>
+  <button (click)="reject()">Reject</button>
+</div>
+
+<div>
+  <input type="text" />
+  <select
+    [ngModel]="selectedCategory"
+    (ngModelChange)="selectedCategoryChanged($event)"
+  >
+    <option *ngFor="let x of categories">
+      {{ x }}
+    </option>
+  </select>
+</div>
+<div *ngFor="let p of products2$ | async">
+  {{ p.title }}
 </div>

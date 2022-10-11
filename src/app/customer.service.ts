@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { concatMap, map, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { IProduct } from './customer';
 /*
@@ -20,6 +21,8 @@ auth https://dummyjson.com/auth/
 export class CustomerService {
   constructor(private httpSvc: HttpClient) {}
   getProducts(): Observable<IProduct[]> {
-    return this.httpSvc.get<IProduct[]>('https://dummyjson.com/products');
+    return this.httpSvc
+      .get<any>('https://dummyjson.com/products')
+      .pipe(map((p) => p.products));
   }
 }

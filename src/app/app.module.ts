@@ -12,6 +12,7 @@ import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { BlogComponent } from './blog/blog.component';
+import { MiscComponent } from './misc/misc.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BlogComponent } from './blog/blog.component';
     HomeComponent,
     AboutComponent,
     BlogComponent,
+    MiscComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

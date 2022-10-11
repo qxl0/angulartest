@@ -1,4 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  catchError,
+  filter,
+  map,
+  Observable,
+  of,
+  Subject,
+  switchMap,
+  tap,
+} from 'rxjs';
+import { IProduct } from '../customer';
 import { CustomerService } from '../customer.service';
 
 @Component({
@@ -8,39 +19,84 @@ import { CustomerService } from '../customer.service';
 })
 export class ProductsComponent implements OnInit {
   _promise: any;
+  _condition: boolean = true;
+  _obs: any;
+  products$: Observable<IProduct[]>;
+  products2$: Observable<IProduct[]>;
+  products: IProduct[];
+  productnames$: Observable<string[]>;
+  private categorySubject = new Subject<string>();
+  categorySelectedAction$ = this.categorySubject.asObservable();
+  categories: string[];
+
+  selectedCategory: string;
   constructor(private svc: CustomerService) {
     console.log('inside constructor');
-    this._promise = new Promise((res, reject) => {
-      let condition = true;
-      if (condition) {
-        setTimeout(() => {
-          res('Promise is resolved successfully.');
-        }, 1000);
-      } else {
-        setTimeout(() => {
-          reject('Promise is rejected!!!');
-        }, 1000);
+    this.products$ = this.svc.getProducts();
+    this.products$.subscribe((res) => {
+      console.log('here');
+      //
+      this.products = res;
+      this.categories = ['all categories'];
+      for (let i = 0; i < res.length; i++) {
+        if (!this.categories.includes(res[i].category))
+          this.categories.push(res[i].category);
       }
     });
 
-    // promise
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    this.productnames$ = this.products$.pipe(
+      map((products) => products.map((product) => product.title))
+    );
+
+    this.products2$ = this.categorySelectedAction$.pipe(
+      switchMap((category) => {
+        console.log(category);
+        if (category == 'all categories') {
+          console.log('all category');
+          return of(this.products);
+        }
+        let pl = this.products.filter((p) => p.category == category);
+        return of(pl);
+      })
+    );
   }
 
-  ngOnInit(): void {
-    this.svc.getProducts().subscribe((plist) => {
-      console.log(plist);
-    });
+  ngOnInit(): void {}
+
+  selectedCategoryChanged(category): void {
+    this.categorySubject.next(category);
   }
 
+  handleError(err) {
+    console.log(err);
+  }
   resolve() {
-    this._promise.then((res) => {
-      console.log(res);
-    });
+    this._condition = true;
+    this._promise
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    this._obs
+      .pipe(
+        map((val: number) => val * val),
+        filter((data: number) => data > 5)
+      )
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+  reject() {
+    this._condition = false;
+    this._promise
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

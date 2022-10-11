@@ -1,33 +1,12 @@
-.red {
-  color: red;
-}
-.blue {
-  color: blue;
-}
-.customer {
+.nav {
+  position: sticy;
+  top: 0;
+  width: 100%;
+  background-color: #3f51b5;
+  color: #fff;
   display: flex;
-}
-.imagegrp {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 0 16px;
   align-items: center;
-  align-content: stretch;
-  row-gap: 10px;
-}
-.image {
-  width: 200px;
-  height: 200px;
-}
-
-.link {
-  color: blue;
-  text-decoration: none;  
-}
-.link:active {
-  color: red;
-}
-.link:hover {
-  text-decoration: underline;
-  cursor: pointer;
+  height: 56px ;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
 }
